@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Cors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace CRUD_Persona
 {
@@ -16,9 +18,11 @@ namespace CRUD_Persona
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.EnableCors(new System.Web.Http.Cors.EnableCorsAttribute("*", "*", "*"));
+            config.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
         }
     }
 }
